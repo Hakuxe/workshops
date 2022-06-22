@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+body{
+   @apply bg-zinc-700 text-zinc-100;
+}
+
+/* CMS = Content Menagement System -> painel ADMIN
+   dados do app fonecidos através de uma API REST Graphql
+*/
