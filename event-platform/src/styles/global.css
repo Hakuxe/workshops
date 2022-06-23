@@ -6,7 +6,8 @@
 
 
 body{
-   @apply bg-zinc-700 text-zinc-100;
+   @apply bg-gray-900 text-gray-100;
+   --webkit-font-smoothing: antialiased;
 }
 
 /* CMS = Content Menagement System -> painel ADMIN
