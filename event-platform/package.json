@@ -9,10 +9,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.8",
-    "@vidstack/player": "^1.6.1",
-    "@vidstack/player-react": "^1.6.1",
     "@vime/core": "^5.3.1",
     "@vime/react": "^5.3.1",
+    "classnames": "^2.3.1",
     "date-fns": "^2.28.0",
     "graphql": "^16.5.0",
     "phosphor-react": "^1.4.1",
