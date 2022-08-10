@@ -7,10 +7,15 @@
  */
 
 import express from "express";
+import { router } from "./routes";
 
 import { databaseConnection } from "./database/connection";
 
+
 const app = express();
+
+app.use(express.json())
+app.use(router);
 
 databaseConnection(); // database
 
