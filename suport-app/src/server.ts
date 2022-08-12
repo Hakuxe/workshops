@@ -6,27 +6,37 @@
  * @types/<nome da lib>
  */
 
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
+import "express-async-errors";
+
 import { router } from "./routes";
-
 import { databaseConnection } from "./database/connection";
-
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 app.use(router);
+
+// middleware -> Um interceptador da requisição tipo um porteiro
+app.use(
+	(err: Error, request: Request, response: Response, next: NextFunction) => {
+		if (err instanceof Error) {
+			//throw new cai aki
+			return response.status(400).json({ 
+            error: err.message, 
+         });
+		}
+
+		return response.status(500).json({
+			status: "error",
+			message: "Internal Server Error",
+		});
+	}
+);
 
 databaseConnection(); // database
 
 app.listen("3030", () => console.log("Rodando porta 3030....."));
-
-
-
-
-
-
-
 
 /**
  * Tipos de parâmetros
