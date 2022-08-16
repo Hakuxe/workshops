@@ -11,7 +11,7 @@ interface IUserRequest {
 }
 
 export class CreateUserService {
-	async execute({ email, name, admin, password }: IUserRequest) {
+	async execute({ email, name, admin = false, password }: IUserRequest) {
 		if (!email) {
 			throw new Error("Email Incorrect");
 		}
@@ -27,7 +27,6 @@ export class CreateUserService {
 		// }
 
 		const passwordEncrypted = await hash(password, 8);
-
 
 		const newUser = UserRepository.create({
 			name,
