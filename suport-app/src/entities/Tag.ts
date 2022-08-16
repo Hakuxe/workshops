@@ -5,7 +5,8 @@ import {
 	PrimaryColumn,
 	UpdateDateColumn,
 } from "typeorm";
-import { v4 as uuid } from "uuid";
+
+import { generateUUID } from "../helpers/idGenerator";
 
 @Entity("tags")
 export class Tag {
@@ -23,7 +24,7 @@ export class Tag {
 
 	constructor() {
 		if (!this.id) {
-			this.id = uuid();
+			this.id = generateUUID();
 		}
 	}
 }
