@@ -6,6 +6,8 @@ import {
 	UpdateDateColumn,
 } from "typeorm";
 
+import { Expose } from "class-transformer";
+
 import { generateUUID } from "../helpers/idGenerator";
 
 @Entity("tags")
@@ -21,6 +23,12 @@ export class Tag {
 
 	@UpdateDateColumn()
 	updated_at: Date;
+
+	// configurando exibição de atributo
+	@Expose({ name: "name_custom" })
+	nameCustrom(): string {
+		return `#${this.name}`;
+	}
 
 	constructor() {
 		if (!this.id) {
