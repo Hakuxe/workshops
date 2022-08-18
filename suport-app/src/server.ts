@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(router);
 
 // middleware -> Um interceptador da requisição tipo um porteiro
+// pode ser feito no próprio use ou num arquivo separado e passado na rota
 app.use(
 	(err: Error, request: Request, response: Response, next: NextFunction) => {
 		if (err instanceof Error) {
