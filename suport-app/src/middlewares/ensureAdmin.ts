@@ -1,16 +1,23 @@
-import {Request, Response, NextFunction} from "express"; 
+import { Request, Response, NextFunction } from "express";
+import { UserRepository } from "../repositories/UserRepositories";
 
-export function ensureAdmin(request: Request, response: Response, next: NextFunction){
+export async function ensureAdmin(
+	request: Request,
+	response: Response,
+	next: NextFunction
+) {
+	const { user_id } = request;
 
-   const isAdmin = false;
+   const user = await UserRepository.findOneBy({ id: user_id });
 
-   if(isAdmin){
-      //  next segue na rota
-      return next();
-   }
+	const isAdmin =  user?.admin;
+   
+	if (isAdmin) {
+		//  next segue na rota
+		return next();
+	}
 
-   return response.status(401).json({
-      error:"User unauthorized"
-   })
-    
+	return response.status(401).json({
+		error: "User unauthorized",
+	});
 }
