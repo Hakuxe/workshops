@@ -6,6 +6,8 @@ import {
 	UpdateDateColumn,
 } from "typeorm";
 
+import { Exclude } from "class-transformer";
+
 import { generateUUID } from "../helpers/idGenerator";
 
 @Entity("users")
@@ -22,6 +24,7 @@ export class User {
 	@Column()
 	admin: boolean;
 
+	@Exclude() // não exibir a senha quando a class for chamada
 	@Column()
 	password: string;
 
@@ -31,9 +34,9 @@ export class User {
 	@UpdateDateColumn()
 	updated_at: Date;
 
-   constructor(){
-      if(!this.id){
-         this.id = generateUUID()
-      }
-   }
+	constructor() {
+		if (!this.id) {
+			this.id = generateUUID();
+		}
+	}
 }
