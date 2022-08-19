@@ -2,6 +2,9 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { UserRepository } from "../repositories/UserRepositories";
 
+import { JWT_SECRET } from "../helpers/accessEnv";
+
+
 interface iAuthenticateRequest {
 	email: string;
 	password: string;
@@ -25,15 +28,20 @@ export class AuthenticateUserService {
 		}
 
 		//gerar token
+		if (!JWT_SECRET) {
+			throw new Error("JWT Secret key undefined");
+		}
+
 		const token = sign(
 			{ email: user.email },
-			"9489c4c01ce849488966d646c4941bb6", // colocar numa variavel de ambiente
+
+			JWT_SECRET, // colocar numa variavel de ambiente
 			{
 				subject: user.id,
 				expiresIn: "10h",
 			}
 		);
 
-      return(token);
+		return token;
 	}
 }

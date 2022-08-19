@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
+import { JWT_SECRET } from "../helpers/accessEnv"
+
 interface IPayload {
-   sub: string;
+	sub: string;
 }
 
 export function ensureAuthenticated(
@@ -22,15 +24,18 @@ export function ensureAuthenticated(
 	const [, authToken] = token.split(" "); //desestruturando a segunda variável do array
 
 	try {
-		const decode = verify(authToken, "9489c4c01ce849488966d646c4941bb6") as IPayload;
 
-      // recuperar informações do user
-      request.user_id = decode.sub;
+		if (!JWT_SECRET) {
+			throw new Error("JWT Secret key undefined");
+		}
+
+		const decode = verify(authToken, JWT_SECRET) as IPayload;
+
+		// recuperar informações do user
+		request.user_id = decode.sub;
 
 		return next();
 	} catch (err) {
 		return response.status(401).end();
 	}
-
-
 }

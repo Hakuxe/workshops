@@ -6,6 +6,9 @@
  * @types/<nome da lib>
  */
 
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 
@@ -23,9 +26,9 @@ app.use(
 	(err: Error, request: Request, response: Response, next: NextFunction) => {
 		if (err instanceof Error) {
 			//throw new cai aki
-			return response.status(400).json({ 
-            error: err.message, 
-         });
+			return response.status(400).json({
+				error: err.message,
+			});
 		}
 
 		return response.status(500).json({
