@@ -1,3 +1,3 @@
 export function App() {
-	return <h1>hello word</h1>;
+	return <h1 className="font-thin">hello word</h1>;
 }
