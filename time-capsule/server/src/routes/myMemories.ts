@@ -41,7 +41,7 @@ export async function myMemoriesRoutes(app: FastifyInstance) {
 	);
 
 	app.post("/memories", async (request) => {
-    const {body} = request.body;
+    // const {body} = request.body;
   });
 
 	app.put("/memories/:id", async () => {});
